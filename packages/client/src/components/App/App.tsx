@@ -4,6 +4,7 @@ import { Dictionary } from '@nest-react/domain';
 
 import { API_URL } from '~/config';
 import { Logger, checkServerVersion } from '~/utils';
+import LoginButton from '../LoginButton';
 
 export const App: FC<unknown> = () => {
   const [response, setResponse] = useState<string>('NO SERVER RESPONSE');
@@ -32,6 +33,9 @@ export const App: FC<unknown> = () => {
   };
   return (
     <>
+      <header>
+        <LoginButton />
+      </header>
       <div>
         Here we use a <code>Dictionary&lt;number&gt;</code> interface from the{' '}
         <code>@nest-react/domain</code> package:
