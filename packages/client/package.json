@@ -1,0 +1,45 @@
+{
+  "name": "@nest-react/client-vite",
+  "version": "1.0.0",
+  "description": "Client boilerplate built with Vite, using React, communicating with a Nest server",
+  "main": "src/index.tsx",
+  "author": "Paul Landázuri",
+  "license": "LGPL-3.0-or-later",
+  "scripts": {
+    "start:dev": "vite",
+    "generate:version": "cd ../.. && yarn generate:version",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "eslint --fix --ext .ts,.tsx,.js,.jsx src",
+    "check-types": "tsc"
+  },
+  "dependencies": {
+    "@nest-react/domain": "^1.0.0",
+    "@nest-react/lib": "^1.0.0",
+    "debug": "^4.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "semver": "^7.5.2"
+  },
+  "peerDependencies": {
+    "@nest-react/server": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/semver": "^7.3.12",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "@vitejs/plugin-react": "^2.0.1",
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.2.10"
+  }
+}
