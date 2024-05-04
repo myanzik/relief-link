@@ -15,7 +15,12 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.13",
     "@gatefi/js-sdk": "^0.18.0",
+    "@mui/icons-material": "^5.15.16",
+    "@mui/material": "^5.15.16",
     "@nest-react/domain": "^1.0.0",
     "@nest-react/lib": "^1.0.0",
     "@worldcoin/idkit": "^1.2.0",
