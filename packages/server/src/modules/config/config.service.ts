@@ -160,4 +160,12 @@ export class ConfigService {
   get predictHqAccessToken(): string {
     return String(this.envConfig.PREDICT_HQ_ACCESS_TOKEN);
   }
+
+  get auth0Domain(): string {
+    return String(this.envConfig.AUTH_0_DOMAIN);
+  }
+
+  get auth0Audience(): string {
+    return String(this.envConfig.AUTH_0_AUDIENCE);
+  }
 }
