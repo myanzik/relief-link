@@ -2,7 +2,7 @@ import { join } from 'path';
 import { readFileSync } from 'fs';
 import { Injectable, Logger } from '@nestjs/common';
 
-import { Dictionary } from '@nest-react/domain';
+import { Dictionary } from '../../types';
 
 import { ConfigService } from '~/modules/config/config.service';
 
