@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { Dictionary } from '@nest-react/domain';
+import { Dictionary } from '../../types';
 
-import { StatusService } from './status.service';
+import { StatusService } from './status.service.js';
 
 @Controller()
 export class StatusController {
-  constructor(private readonly statusService: StatusService) {}
+  constructor(private readonly statusService: StatusService) { }
 
   @Get()
   getStatus(): string {

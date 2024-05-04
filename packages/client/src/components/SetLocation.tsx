@@ -1,7 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@mui/material/Box';
-import React from 'react';
-import Autocomplete from 'react-google-autocomplete';
+import React, { useContext } from 'react';
+import Autocomplete, { usePlacesWidget } from 'react-google-autocomplete';
+import { AppContext, AppContextProps } from '~/AppContext';
 
 const googleAPIKey = 'AIzaSyA4sRpbJ-CMvDKXVPBrzen9MFts74wdXGE';
 
@@ -21,9 +22,11 @@ export default function SetLocation() {
     onPlaceSelected: place => console.log(place),
     inputAutocompleteValue: 'country',
     options: {
-      componentRestrictions: { country },
+      types: ['premise', 'subpremise', 'room'],
+      fields: ['address_components', 'geometry'],
     },
   });
+  const { setPlace } = useContext<AppContextProps>(AppContext);
 
   // TODO: save the address and ask for a radius if the user is a relief worker
   return (
@@ -36,6 +39,7 @@ export default function SetLocation() {
             types: ['premise', 'subpremise', 'room'],
             fields: ['address_components', 'geometry'],
           }}
+          onPlaceSelected={setPlace}
         />
         {roles.includes('relief-worker') && (
           <>

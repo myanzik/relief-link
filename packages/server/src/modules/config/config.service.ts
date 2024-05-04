@@ -45,7 +45,7 @@ export class ConfigService {
    * @param env The environment name. Corresponding `name.env` file will be used. Default to `local`
    */
   private getConfigFromEnvFile(env = 'local'): DotenvParseOutput {
-    const envFilePath = join('env', `${env}.env`);
+    const envFilePath = `.env`;
     try {
       const config = parse(readFileSync(envFilePath));
       return config;
@@ -155,5 +155,17 @@ export class ConfigService {
 
   get secretJwtKey(): string {
     return String(this.envConfig.SECRET_JWT_KEY);
+  }
+
+  get predictHqAccessToken(): string {
+    return String(this.envConfig.PREDICT_HQ_ACCESS_TOKEN);
+  }
+
+  get auth0Domain(): string {
+    return String(this.envConfig.AUTH_0_DOMAIN);
+  }
+
+  get auth0Audience(): string {
+    return String(this.envConfig.AUTH_0_AUDIENCE);
   }
 }

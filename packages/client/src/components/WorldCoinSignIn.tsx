@@ -6,15 +6,24 @@ import {
   VerificationLevel,
 } from '@worldcoin/idkit';
 import React from 'react';
+import { API_URL } from '~/config';
 
-// TODO: Implement WorldCoinSignIn component
+// NOTE: We are using worldcoin staging here so we don't use real phones or real accounts
 function WorldCoinSignIn() {
   // TODO: Calls your implemented server route
   const verifyProof = async (proof: ISuccessResult) => {
-    throw new Error('TODO: verify proof server route');
+    const response = await fetch(`${API_URL}/account/worldcoin-proof`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ proof }),
+    });
+    // TODO: Handle error or do something with response
+    await response.json();
   };
 
-  // TODO: Functionality after verifying
+  // Let user move to next onboarding step
   const onSuccess = () => {
     console.log('Success');
   };
