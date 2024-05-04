@@ -10,9 +10,9 @@ import {
 
 import { APP_ROOT } from '~/config';
 import { App } from '~/components/App';
-import { createBrowserHistory } from 'history';
 import './index.css';
 import { Auth0Provider } from '@auth0/auth0-react';
+import AppContextProvider from './AppContext';
 
 const container = document.getElementById(APP_ROOT);
 const root = createRoot(container!);
@@ -34,9 +34,11 @@ function ReactApp(): JSX.Element {
       }}
     >
       <ThirdwebProvider>
-        <Suspense fallback={<div />}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <AppContextProvider>
+          <Suspense fallback={<div />}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </AppContextProvider>
       </ThirdwebProvider>
     </Auth0Provider>
   );
