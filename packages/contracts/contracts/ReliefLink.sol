@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/Multicall.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./IApiCallOracle.sol";
 
 contract ReliefLink is AccessControl, Multicall {
 	// Add the library methods
@@ -29,10 +30,13 @@ contract ReliefLink is AccessControl, Multicall {
 
 	uint256 public minAmount = 10; // 10 token
 
+	uint64 public subscriptionId;
+
 	constructor(
 		address[] memory _admins,
 		address _reliefToken,
-		address _apiCallOracle
+		address _apiCallOracle,
+		uint64 _subscriptionId
 	) {
 		// assign the role of admin to the addresses passed in the constructor
 		for (uint256 i = 0; i < _admins.length; i++) {
@@ -41,6 +45,7 @@ contract ReliefLink is AccessControl, Multicall {
 		reliefToken = IERC20(_reliefToken);
 
 		apiCallOracle = IApiCallOracle(_apiCallOracle);
+		subscriptionId = _subscriptionId;
 	}
 
 	modifier onlyAdmin() {
@@ -77,6 +82,16 @@ contract ReliefLink is AccessControl, Multicall {
 		return victims.length();
 	}
 
+	function isValidVictim(
+		address victim
+	) public view returns (bool _isVictim) {
+		string[] memory args = new string[](2);
+		args[0] = victimDetails[victim].lat;
+		args[1] = victimDetails[victim].lon;
+		//get from oracle
+		//_isVictim = apiCallOracle.sendRequest(subscriptionId, args);
+	}
+
 	//#enfregion manageVictim
 
 	function getReliefPoolBalance() public view returns (uint256) {
@@ -90,7 +105,7 @@ contract ReliefLink is AccessControl, Multicall {
 	}
 
 	//Check if the disaster status is true
-	function checkhasTriggered() public view returns (bool) {
+	function checkHasTriggered() public view returns (bool) {
 		return hasTriggered;
 	}
 

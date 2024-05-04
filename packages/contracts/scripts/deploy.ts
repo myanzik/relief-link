@@ -4,6 +4,8 @@ import { ethers } from "hardhat"
 import path from 'path'
 import fs from 'fs'
 
+const oracleSubscriptionId = 34
+
 async function main() {
 	const admins = ['0x4bD2EC53D9d374F1a61D325b3Bc7BB00b42B5992']
 	const contractClassName = "ApiCallOracle"
@@ -21,7 +23,7 @@ async function main() {
 	await reliefToken.waitForDeployment()
 
 	console.log("Deploying Relief Link");
-	const reliefLinkContract = await ethers.deployContract(ReliefLink, [admins, reliefToken.target, apiCallOracle.target])
+	const reliefLinkContract = await ethers.deployContract(ReliefLink, [admins, reliefToken.target, apiCallOracle.target, oracleSubscriptionId])
 	await reliefLinkContract.waitForDeployment()
 
 	console.log("Contract Deployed at", {
