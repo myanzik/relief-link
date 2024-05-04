@@ -1,5 +1,9 @@
 declare module 'predicthq' {
-  interface EventSearchResult {
+
+  export interface EventSearchResult {
+    result: EventSearchResultResult;
+  }
+  interface EventSearchResultResult {
     count: number;
     overflow: boolean;
     next: string | null;

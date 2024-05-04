@@ -156,4 +156,8 @@ export class ConfigService {
   get secretJwtKey(): string {
     return String(this.envConfig.SECRET_JWT_KEY);
   }
+
+  get predictHqAccessToken(): string {
+    return String(this.envConfig.PREDICT_HQ_ACCESS_TOKEN);
+  }
 }
