@@ -57,6 +57,7 @@ export const App: FC<unknown> = () => {
         {response}
         {JSON.stringify(activeAccount)}
         {activeAccount && <SetLocation />}
+        <SetLocation />
         {activeAccount && (
           <GateFiBuy
             apiKey="123"
