@@ -1,15 +1,14 @@
 {
-  "name": "nest-react",
+  "name": "@nest-react/contract",
   "version": "1.0.0",
-  "author": "Paul Landázuri",
-  "description": "Simple boilerplate for a Nest + React project",
-  "homepage": "https://github.com/LandazuriPaul/nest-react#readme",
+  "description": "Aid",
+  "homepage": "https://github.com/myanzik/relief-link#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LandazuriPaul/nest-react.git"
+    "url": "git+https://github.com/myanzik/relief-link.git"
   },
   "bugs": {
-    "url": "https://github.com/LandazuriPaul/nest-react/issues"
+    "url": "https://github.com/myanzik/relief-link/issues"
   },
   "directories": {
     "doc": "docs"
@@ -24,13 +23,18 @@
     },
     {
       "path": "packages/lib"
+    },
+    {
+      "path": "packages/contracts"
     }
   ],
   "scripts": {
     "generate:version": "./scripts/generate_version.sh",
     "start:domain": "yarn workspace @nest-react/domain start:dev",
     "start:lib": "yarn workspace @nest-react/lib start:dev",
+    "start:server": "yarn workspace @nest-react/server start:dev",
     "start:common": "(yarn start:domain & yarn start:lib)",
+    "contracts:compile": "yarn workspace @nest-react/contracts compile",
     "build:domain": "yarn workspace @nest-react/domain build",
     "build:lib": "yarn workspace @nest-react/lib build",
     "build:common": "yarn build:domain && yarn build:lib",

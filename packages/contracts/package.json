@@ -1,5 +1,5 @@
 {
-	"name": "hardhat-base-template",
+	"name": "@nest-react/contracts",
 	"version": "1.0.0",
 	"description": "A Basic Hardhat scaffolding porject to deploy contracts on Base",
 	"author": "Gerald Lonlas",
@@ -19,12 +19,21 @@
 		"lint:fix": "eslint --fix ."
 	},
 	"dependencies": {
+		"@chainlink/contracts": "^1.1.0",
 		"@openzeppelin/contracts": "5.0.2"
 	},
 	"devDependencies": {
+		"@nomicfoundation/hardhat-chai-matchers": "^2.0.6",
+		"@nomicfoundation/hardhat-ethers": "^3.0.5",
+		"@nomicfoundation/hardhat-network-helpers": "^1.0.10",
 		"@nomicfoundation/hardhat-toolbox": "^4.0.0",
+		"@nomicfoundation/hardhat-verify": "^2.0.6",
 		"@nomiclabs/hardhat-solhint": "^3.0.1",
 		"@openzeppelin/test-helpers": "^0.5.16",
+		"@typechain/ethers-v6": "^0.5.1",
+		"@typechain/hardhat": "^9.1.0",
+		"@types/chai": "^4.3.15",
+		"@types/mocha": "^10.0.6",
 		"@types/node": "^20.0.0",
 		"@typescript-eslint/eslint-plugin": "^6.10.0",
 		"@typescript-eslint/parser": "^6.10.0",
@@ -35,10 +44,13 @@
 		"ethers": "^6.8.1",
 		"hardhat": "^2.22.2",
 		"hardhat-deploy": "^0.12.4",
+		"hardhat-gas-reporter": "^1.0.10",
 		"prettier": "^3.0.3",
 		"prettier-plugin-solidity": "^1.2.0",
 		"solhint": "^4.0.0",
 		"solidity-coverage": "^0.8.5",
+		"ts-node": "^10.9.2",
+		"typechain": "^8.3.2",
 		"typescript": "^5.2.2"
 	}
 }
