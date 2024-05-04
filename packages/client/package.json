@@ -15,11 +15,13 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.0",
+    "@gatefi/js-sdk": "^0.18.0",
     "@nest-react/domain": "^1.0.0",
     "@nest-react/lib": "^1.0.0",
     "@worldcoin/idkit": "^1.2.0",
     "debug": "^4.3.4",
     "history": "^5.3.0",
+    "randombytes": "^2.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-google-autocomplete": "^2.7.3",
@@ -32,6 +34,7 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
+    "@types/randombytes": "^2",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/semver": "^7.3.12",
