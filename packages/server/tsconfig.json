@@ -4,10 +4,8 @@
     "baseUrl": ".",
     "emitDecoratorMetadata": true,
     "module": "ESNext",
+    "target": "ESNext",
     "outDir": "dist",
-    "paths": {
-      "~/*": ["src/*"]
-    },
     "strictPropertyInitialization": false
   }
 }

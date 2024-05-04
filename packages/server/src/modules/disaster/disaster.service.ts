@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import Client from 'predicthq';
-import { ConfigService } from '../config/config.service';
+import { Client } from 'predicthq';
+import { ConfigService } from '../config/config.service.js';
 
 const DISASTER_RANGE = 100; // 100km
 
@@ -9,8 +9,8 @@ const TEST_DISASTER_COORDS = [90, 0];
 @Injectable()
 export class DisasterService {
   private logger = new Logger(DisasterService.name);
-
   client: Client;
+
   constructor(private configService: ConfigService) {
     this.client = new Client({
       access_token: this.configService.predictHqAccessToken,

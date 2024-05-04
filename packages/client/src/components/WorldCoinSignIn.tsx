@@ -12,6 +12,9 @@ function WorldCoinSignIn() {
   const verifyProof = async (proof: ISuccessResult) => {
     const response = await fetch(`${API_URL}/account/worldcoin-proof`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ proof }),
     });
     // TODO: Handle error or do something with response

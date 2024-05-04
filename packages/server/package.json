@@ -5,6 +5,7 @@
   "author": "Paul Landázuri",
   "license": "LGPL-3.0-or-later",
   "main": "src/main.ts",
+  "type": "module",
   "scripts": {
     "generate:version": "cd ../.. && yarn generate:version",
     "prebuild": "rimraf dist",

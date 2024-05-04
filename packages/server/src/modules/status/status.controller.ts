@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 
 import { Dictionary } from '../../types';
 
-import { StatusService } from './status.service';
+import { StatusService } from './status.service.js';
 
 @Controller()
 export class StatusController {

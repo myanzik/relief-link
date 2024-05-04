@@ -4,7 +4,7 @@ import { Injectable, Logger } from '@nestjs/common';
 
 import { Dictionary } from '../../types';
 
-import { ConfigService } from '~/modules/config/config.service';
+import { ConfigService } from '../config/config.service.js';
 
 @Injectable()
 export class StatusService {

@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { DisasterService } from './disaster.service';
+import { DisasterService } from './disaster.service.js';
 
 interface DisasterSearch {
   lat: number;
