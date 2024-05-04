@@ -56,13 +56,13 @@ interface GateFiBuyProps {
 function setEnvironment(environment: GateFiBuyProps['environment']) {
   switch (environment) {
     case 'production':
-      'https://api.gatefi.com/onramp/v1/buy';
+      return 'https://api.gatefi.com/onramp/v1/buy';
     case 'sandbox':
-      'https://api-sandbox.gatefi.com/onramp/v1/buy';
+      return 'https://api-sandbox.gatefi.com/onramp/v1/buy';
     case 'mock-server':
-      'https://mock-server.gatefi.com/onramp/v1/buy';
+      return 'https://mock-server.gatefi.com/onramp/v1/buy';
     default:
-      'https://api-sandbox.gatefi.com/onramp/v1/buy';
+      return 'https://api-sandbox.gatefi.com/onramp/v1/buy';
   }
 }
 
@@ -75,7 +75,7 @@ export default function GateFiBuy(props: GateFiBuyProps) {
   const signature = props.signature ?? DEFAULT_SIGNATURE;
   // A client-defined randomly generated 64-character string used to retrieve the order in case the redirection goes wrong. Used characters: lower case (a-z), upper case (A-Z) and digits (0-9). This parameter is used only if the orderCustomId parameter is enabled in the Retrieve the full platform configuration endpoint.
   const orderCustomId = randomOrderId();
-  const url = setEnvironment(props.environment);
+  const baseUrl = setEnvironment(props.environment);
 
   const handleClick = () => {
     const options = {
@@ -100,7 +100,7 @@ export default function GateFiBuy(props: GateFiBuyProps) {
       ...(props.declineUrl && { declineUrl: props.declineUrl }),
     }).toString();
 
-    fetch(`${url}?${query}`, options)
+    fetch(`${baseUrl}?${query}`, options)
       .then(response => {
         if (response.status !== 303) {
           setError(`Error: ${response.status}`);

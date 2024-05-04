@@ -9,6 +9,7 @@ import { useActiveAccount } from 'thirdweb/react';
 import WorldCoinSignIn from '../WorldCoinSignIn';
 import Wallet from '../Wallet';
 import GateFiBuy from '../GateFiBuy';
+import SetLocation from '../SetLocation';
 
 export const App: FC<unknown> = () => {
   const [response, setResponse] = useState<string>('NO SERVER RESPONSE');
@@ -55,6 +56,7 @@ export const App: FC<unknown> = () => {
         <br />
         {response}
         {JSON.stringify(activeAccount)}
+        {activeAccount && <SetLocation />}
         {activeAccount && (
           <GateFiBuy
             apiKey="123"
@@ -73,6 +75,3 @@ export const App: FC<unknown> = () => {
     </>
   );
 };
-function useThirdweb(): { contract: any } {
-  throw new Error('Function not implemented.');
-}

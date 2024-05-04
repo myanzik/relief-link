@@ -2221,6 +2221,7 @@ __metadata:
     prettier: "npm:^2.7.1"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
+    react-google-autocomplete: "npm:^2.7.3"
     react-router-dom: "npm:^6.23.0"
     semver: "npm:^7.5.2"
     thirdweb: "npm:^5.15.0"
@@ -13325,6 +13326,11 @@ __metadata:
   version: 4.5.0
   resolution: "lodash.clonedeep@npm:4.5.0"
   checksum: 10c0/2caf0e4808f319d761d2939ee0642fa6867a4bbf2cfce43276698828380756b99d4c4fa226d881655e6ac298dd453fe12a5ec8ba49861777759494c534936985
+
+"lodash.debounce@npm:^4.0.8":
+  version: 4.0.8
+  resolution: "lodash.debounce@npm:4.0.8"
+  checksum: 10c0/762998a63e095412b6099b8290903e0a8ddcb353ac6e2e0f2d7e7d03abd4275fe3c689d88960eb90b0dde4f177554d51a690f22a343932ecbc50a5d111849987
   languageName: node
   linkType: hard
 
@@ -15512,7 +15518,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
+"prop-types@npm:^15.5.0, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -15797,6 +15803,18 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 10c0/a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
+  languageName: node
+  linkType: hard
+
+"react-google-autocomplete@npm:^2.7.3":
+  version: 2.7.3
+  resolution: "react-google-autocomplete@npm:2.7.3"
+  dependencies:
+    lodash.debounce: "npm:^4.0.8"
+    prop-types: "npm:^15.5.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/d627a02087650b97fb519f5007d9e94a48e1d3541ee6ecb081dc1fdd40147d814cda41e0e036638800e9d01ddf99085dcd581630a34dffc1686008c04e61d6ee
   languageName: node
   linkType: hard
 
