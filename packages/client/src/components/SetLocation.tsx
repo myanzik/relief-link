@@ -36,13 +36,12 @@ export default function SetLocation() {
         {roles.includes('relief-worker') && (
           <>
             <p>Set the radius of your work area</p>
-            <input type="number" placeholder="Radius in meters" />
+            <TextField type="number" placeholder="Radius in meters" />
           </>
         )}
         {roles.includes('Funder') && (
           <>
             <p>You are a funder we do not need your address</p>
-            <input type="number" placeholder="Radius in meters" />
           </>
         )}
       </Box>
