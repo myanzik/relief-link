@@ -1,5 +1,8 @@
 declare module 'predicthq' {
-  interface EventSearchResult {
+  export interface EventSearchResult {
+    result: EventSearchResultResult;
+  }
+  interface EventSearchResultResult {
     count: number;
     overflow: boolean;
     next: string | null;
@@ -7,7 +10,8 @@ declare module 'predicthq' {
     results: any[];
   }
 
-  export default class Client {
+  export class Client {
+    static Client: any;
     constructor(options: { access_token: string });
     events: {
       search(query: any): Promise<EventSearchResult>;
