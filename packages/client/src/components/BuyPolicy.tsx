@@ -2,17 +2,15 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Alert } from '@mui/material';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import React, { useContext } from 'react';
 import {
-  prepareContractCall,
-  getContract,
   Chain,
   createThirdwebClient,
+  getContract,
+  prepareContractCall,
 } from 'thirdweb';
-import { useActiveAccount, TransactionButton } from 'thirdweb/react';
+import { TransactionButton, useActiveAccount } from 'thirdweb/react';
 import { AppContext } from '~/AppContext';
-import abi from '~/utils/contractABI';
 
 const ADDRESS = '0xA7Fb04Fe07e1436295c29718567B6946e9045A22';
 
@@ -25,7 +23,7 @@ const client = createThirdwebClient({
   clientId: '714431ba817d002582d77c75e11a9676',
 });
 
-const contract = getContract({
+export const contract = getContract({
   client,
   chain,
   address: ADDRESS,
