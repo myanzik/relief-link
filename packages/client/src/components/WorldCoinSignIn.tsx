@@ -10,6 +10,7 @@ import { API_URL } from '~/config';
 
 // NOTE: We are using worldcoin staging here so we don't use real phones or real accounts
 function WorldCoinSignIn() {
+  const [succeeded, setSucceeded] = React.useState(false);
   // TODO: Calls your implemented server route
   const verifyProof = async (proof: ISuccessResult) => {
     const response = await fetch(`${API_URL}/account/worldcoin-proof`, {
@@ -26,6 +27,7 @@ function WorldCoinSignIn() {
   // Let user move to next onboarding step
   const onSuccess = () => {
     console.log('Success');
+    setSucceeded(true);
   };
 
   return (
@@ -38,7 +40,7 @@ function WorldCoinSignIn() {
     >
       {({ open }) => (
         <Box sx={{ textAlign: 'center', p: 4 }}>
-          <Button variant="contained" onClick={open}>
+          <Button variant="contained" disabled={succeeded} onClick={open}>
             Verify with World ID
           </Button>
         </Box>
