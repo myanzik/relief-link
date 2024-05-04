@@ -19,20 +19,13 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 	bytes public s_lastResponse;
 	bytes public s_lastError;
 
-	// Placeholder address for Sean's wallet testing
-	address public seansAddress = 0x38c6CfB57a194FC383C664A1c8182209c5C04577;
-
-	// Storing state of wallet addresses
-	mapping(address => bool) private walletAddressReceived;
-	address[] public walletAddresses;
-
 	// Custom error type
 	error UnexpectedRequestID(bytes32 requestId);
 
 	// Event to log responses
 	event Response(
 		bytes32 indexed requestId,
-		address walletAddress,
+		bool isVictim,
 		bytes response,
 		bytes err
 	);
@@ -41,8 +34,7 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 	address router = 0xf9B8fc078197181C841c296C876945aaa425B278;
 
 	// JavaScript source code
-	// Fetch character name from the Star Wars API.
-	// Documentation: https://swapi.info/people
+	// Fetch from API.
 	string source =
 		"const characterId = args[0];"
 		"const apiResponse = await Functions.makeHttpRequest({"
@@ -62,7 +54,7 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 		0x66756e2d626173652d7365706f6c69612d310000000000000000000000000000;
 
 	// State variable to store the returned wallet address information
-	address public walletAddress;
+	bool public isVictim;
 
 	/**
 	 * @notice Initializes the contract with the Chainlink router address and sets the contract owner
@@ -70,7 +62,7 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 	constructor() FunctionsClient(router) ConfirmedOwner(msg.sender) {}
 
 	/**
-	 * @notice Sends an HTTP request for character information
+	 * @notice Sends an HTTP request for boolean information
 	 * @param subscriptionId The ID for the Chainlink subscription
 	 * @param args The arguments to pass to the HTTP request
 	 * @return requestId The ID of the request
@@ -112,25 +104,11 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 		// Update the contract's state variables with the response and any errors
 		s_lastResponse = response;
 
-		// walletAddress = address(
-		// 	uint160(uint256(keccak256(abi.encodePacked(response))))
-		// );
-
-		walletAddress = seansAddress;
+		isVictim = abi.decode(response, (bool));
 
 		s_lastError = err;
 
-		// Check if sender's wallet address is already received before
-		if (!walletAddressReceived[walletAddress]) {
-			walletAddressReceived[walletAddress] = true;
-			walletAddresses.push(walletAddress);
-		}
-
 		// Emit an event to log the response
-		emit Response(requestId, walletAddress, s_lastResponse, s_lastError);
-	}
-
-	function getElement(uint256 index) public view returns (address) {
-		return walletAddresses[index];
+		emit Response(requestId, isVictim, s_lastResponse, s_lastError);
 	}
 }
