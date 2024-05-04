@@ -14,6 +14,7 @@ import ProfilePicture from '../header/ProfilePicture';
 import Logo from '../header/Logo';
 
 import Box from '@mui/material/Box';
+import ResponsiveAppBar from '../header/ResponsiveAppBar';
 
 export const App: FC<unknown> = () => {
   const [response, setResponse] = useState<string>('NO SERVER RESPONSE');
@@ -45,15 +46,14 @@ export const App: FC<unknown> = () => {
   return (
     <>
       <Box>
+        <ResponsiveAppBar />
         <header>
-          <Logo />
           <LoginButton />
-          <ProfilePicture />
         </header>
-
         <div>
           {isAuthenticated && <WorldCoinSignIn />}
-          <Wallet />
+
+          {isAuthenticated && <Wallet />}
         </div>
       </Box>
       <div>

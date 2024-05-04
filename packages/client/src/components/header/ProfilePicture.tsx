@@ -20,15 +20,10 @@ const ProfilePicture: React.FC = () => {
     fetchProfilePicture();
   }, [isAuthenticated, user]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-    console.log(isLoading);
-  }
-
   return (
     <div>
       {isAuthenticated && user && (
-        <>{imageUrl && <img src={imageUrl} alt="Profile" />}</>
+        <>{imageUrl && <img src={imageUrl} alt="Profile" style={{width: "100%"}} />}</>
       )}
     </div>
   );
