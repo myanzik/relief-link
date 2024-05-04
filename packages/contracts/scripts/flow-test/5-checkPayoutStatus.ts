@@ -6,7 +6,9 @@ const sendPayout = async () => {
     const { apiCallOracle, reliefToken, reliefLink } = await fetchContracts()
 
     const balance = await reliefToken.balanceOf(victim1.address)
-
+    const contractBalance = await reliefToken.balanceOf(reliefLink.target)
+    console.log("balance in victim1: " + balance.toString())
+    console.log("balance in relieflink: " + contractBalance.toString())
     console.log(balance.toString())
 }
 

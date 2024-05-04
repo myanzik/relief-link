@@ -121,12 +121,17 @@ contract ReliefLink is AccessControl, Multicall {
 	// }
 
 	function getReliefAmount() public view returns (uint256) {
-		return reliefToken.balanceOf(address(this)) / victims.length();
+		return (
+			(reliefToken.balanceOf(address(this)) / (victims.length() * 100))
+		);
 	}
 
 	function sendReliefToAll() public onlyAdmin {
 		for (uint256 i = 0; i < victims.length(); i++) {
-			if (apiCallOracle.isAddressEligible(victims.at(i))) {
+			if (
+				apiCallOracle.isAddressEligible(victims.at(i)) &&
+				!victimDetails[victims.at(i)].hasClaimed
+			) {
 				victimDetails[victims.at(i)].hasClaimed = true;
 				reliefToken.transfer(victims.at(i), getReliefAmount());
 			}
@@ -139,8 +144,8 @@ contract ReliefLink is AccessControl, Multicall {
 			reliefToken.balanceOf(address(this)) > 0,
 			"No balance to claim"
 		);
-		require(hasTriggered, "Not Released");
+		if (!victimDetails[msg.sender].hasClaimed)
+			reliefToken.transfer(msg.sender, getReliefAmount());
 		victimDetails[msg.sender].hasClaimed = true;
-		reliefToken.transfer(msg.sender, getReliefAmount());
 	}
 }
