@@ -4,6 +4,7 @@ pragma solidity 0.8.20;
 import { FunctionsClient } from "@chainlink/contracts/src/v0.8/functions/v1_0_0/FunctionsClient.sol";
 import { ConfirmedOwner } from "@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwner.sol";
 import { FunctionsRequest } from "@chainlink/contracts/src/v0.8/functions/v1_0_0/libraries/FunctionsRequest.sol";
+import { IApiCallOracle } from "./IApiCallOracle.sol";
 
 /**
  * @title ApiCallOracle
@@ -11,7 +12,7 @@ import { FunctionsRequest } from "@chainlink/contracts/src/v0.8/functions/v1_0_0
  * @dev
  */
 
-contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
+contract ApiCallOracle is IApiCallOracle, FunctionsClient, ConfirmedOwner {
 	using FunctionsRequest for FunctionsRequest.Request;
 
 	// State variables to store the last request ID, response, and error

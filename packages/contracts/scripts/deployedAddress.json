@@ -1,3 +1,5 @@
 {
-  "oracleAddress": "0xa6d0AD97e53FF64b83F860522c069Ad36deE8fC3"
+  "oracleAddress": "0xd2cC78A91FebAB407B54E121D2b6b3904Bfc1B2F",
+  "reliefTokenAddress": "0xBB7C781Adb64F2237ddf508A278a74F80D5Fa09b",
+  "reliefLinkAddress": "0x79f2b33352e8058c860E041F5f0391eBB0a1Dc80"
 }

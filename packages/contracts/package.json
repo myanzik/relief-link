@@ -11,6 +11,7 @@
 		"deploy": "hardhat deploy --network base-sepolia",
 		"deploy:baseSepolia": "hardhat run scripts/deploy.ts --network base-sepolia",
 		"test:baseSepolia": "hardhat run scripts/oracleTest.ts --network base-sepolia",
+		"test:reliefLink": "hardhat run scripts/reliefLinkTest.ts --network base-sepolia",
 		"node": "hardhat node",
 		"sol:format:check": "prettier --check --plugin=prettier-plugin-solidity 'contracts/**/*.sol'",
 		"sol:format:write": "prettier --write --plugin=prettier-plugin-solidity 'contracts/**/*.sol'",
