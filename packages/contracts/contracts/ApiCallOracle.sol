@@ -44,7 +44,7 @@ contract ApiCallOracle is IApiCallOracle, FunctionsClient, ConfirmedOwner {
 		"throw Error('Request failed');"
 		"}"
 		"const { data } = apiResponse;"
-		"return Functions.encodeUint256(1);";
+		"return Functions.encodeUint256(data);";
 
 	//Callback gas limit
 	uint32 gasLimit = 300000;
@@ -116,7 +116,7 @@ contract ApiCallOracle is IApiCallOracle, FunctionsClient, ConfirmedOwner {
 		}
 
 		s_lastError = err;
-
+		//victimAddressAdded[victimAddress] = true;
 		// Emit an event to log the response
 		emit Response(isVictim);
 	}

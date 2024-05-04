@@ -33,7 +33,8 @@ async function buyPolicy() {
 }
 
 async function main() {
-	const victim1Address = "0xa05657c8554af40ffc253cb28ad9be92eda24d12"
+	const { victim1 } = await getSigners()
+	console.log({ victim1: victim1.address })
 	const { apiCallOracle, reliefToken, reliefLink } = await fetchContracts()
 	const owner = await apiCallOracle.owner()
 	const tokenSupply = await reliefToken.totalSupply()
@@ -51,15 +52,25 @@ async function main() {
 
 	//Check api call
 	// @ts-ignore
-	const apiCall = await apiCallOracle.sendRequest(26, ["90", "0"], victim1Address)
 
+	const apiCall = await apiCallOracle.sendRequest(
+		34, ["90", "0"], victim1.address)
+	console.log(apiCall)
 	//Check if victim address is added
-	// @ts-ignore
-	console.log(await apiCallOracle.isAddressAdded(victim1Address))
+	console.log(await apiCallOracle.isAddressAdded(victim1.address))
+}
+
+async function checkIfAddressAdded() {
+	const { victim1 } = await getSigners()
+	const { apiCallOracle } = await fetchContracts()
+	console.log("is address added: " + await apiCallOracle.isAddressAdded(victim1.address))
 }
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
-	console.error(error)
-	process.exitCode = 1
-})
+
+// main().catch((error) => {
+// 	console.error(error)
+// 	process.exitCode = 1
+// })
+
+checkIfAddressAdded()
