@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import {
+  GateFiDisplayModeEnum,
+  GateFiSDK,
+  GateFiLangEnum,
+} from '@gatefi/js-sdk';
+import { useAuth0 } from '@auth0/auth0-react';
+import randomBytes from 'randombytes';
 
 const DEFAULT_SIGNATURE =
   '2b6b6c58d175ec6bd13c92a17d262fce9336fe1bb41fc1bae0753927c0bbcf2d';
+
+const MERCHANT_ID = 'fa23a156-a95e-4706-84c4-f6999006f32c';
 
 // const url = 'https://api-sandbox.gatefi.com/onramp/v1/buy';
 // const options = {
@@ -49,8 +58,8 @@ interface GateFiBuyProps {
   walletAddress: string;
   // A signature is a digital authentication which is used to verify the identity of the requester. Specify the signature in the header parameter called signature.
   signature?: string;
-  // If you want to further customize the language of the widget, you can append the following parameters to the redirected address:
-  redirectLang?: string;
+  // text for the button
+  buttonText?: string;
 }
 
 function setEnvironment(environment: GateFiBuyProps['environment']) {
@@ -66,63 +75,60 @@ function setEnvironment(environment: GateFiBuyProps['environment']) {
   }
 }
 
-function randomOrderId() {
-  return Math.random().toString(36).substring(2, 15);
-}
-
 export default function GateFiBuy(props: GateFiBuyProps) {
   const [error, setError] = useState('');
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const overlayInstanceSDK = useRef<GateFiSDK | null>(null);
+  const { isAuthenticated, user } = useAuth0();
+
+  if (!isAuthenticated) return null;
+  const userEmail = user?.email;
+
   const signature = props.signature ?? DEFAULT_SIGNATURE;
   // A client-defined randomly generated 64-character string used to retrieve the order in case the redirection goes wrong. Used characters: lower case (a-z), upper case (A-Z) and digits (0-9). This parameter is used only if the orderCustomId parameter is enabled in the Retrieve the full platform configuration endpoint.
-  const orderCustomId = randomOrderId();
   const baseUrl = setEnvironment(props.environment);
 
-  const handleClick = () => {
-    const options = {
-      method: 'GET',
-      headers: {
-        signature,
-        Accept: 'application/json',
-        'api-key': props.apiKey,
-      },
-    };
-    const query = new URLSearchParams({
-      amount: props.amount,
-      crypto: props.crypto,
-      fiat: props.fiat,
-      partnerAccountId: props.partnerAccountId,
-      paymentMethod: props.paymentMethod,
-      redirectUrl: props.redirectUrl,
-      region: props.region,
-      walletAddress: props.walletAddress,
-      orderCustomId,
-      ...(props.cancelUrl && { cancelUrl: props.cancelUrl }),
-      ...(props.declineUrl && { declineUrl: props.declineUrl }),
-    }).toString();
-
-    fetch(`${baseUrl}?${query}`, options)
-      .then(response => {
-        if (response.status !== 303) {
-          setError(`Error: ${response.status}`);
-          return;
-        }
-        const location = response.headers.get('Location');
-        if (!location) {
-          setError('Error: No location header');
-          return;
-        }
-        window.location.assign(location);
-        return;
-      })
-      .catch(error => {
-        setError(`Error: ${error}`);
+  const handleOnClick = () => {
+    if (overlayInstanceSDK.current) {
+      if (isOverlayVisible) {
+        overlayInstanceSDK.current.hide();
+        setIsOverlayVisible(false);
+      } else {
+        overlayInstanceSDK.current.show();
+        setIsOverlayVisible(true);
+      }
+    } else {
+      const randomString = randomBytes(32).toString('hex');
+      overlayInstanceSDK.current = new GateFiSDK({
+        merchantId: MERCHANT_ID,
+        displayMode: GateFiDisplayModeEnum.Overlay,
+        nodeSelector: '#overlay-button',
+        lang: GateFiLangEnum.en_US,
+        isSandbox: true,
+        successUrl: 'https://www.crypto.unlimit.com/',
+        walletAddress: props.walletAddress,
+        email: userEmail,
+        externalId: randomString,
+        defaultFiat: {
+          currency: 'USD',
+          amount: '20',
+        },
+        defaultCrypto: {
+          currency: 'USDT-BEP20',
+        },
       });
+    }
+    overlayInstanceSDK.current?.show();
+    setIsOverlayVisible(true);
   };
 
   return (
     <>
       {error}
-      <button onClick={handleClick}>GateFi Buy</button>
+      <button onClick={handleOnClick}>
+        {props.buttonText || 'Buy Crypto'}
+      </button>
+      <div id="overlay-button"></div>
     </>
   );
 }

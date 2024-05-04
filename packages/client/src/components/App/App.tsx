@@ -58,7 +58,6 @@ export const App: FC<unknown> = () => {
       </Box>
       <div>
         {activeAccount && <SetLocation />}
-
         {activeAccount && (
           <GateFiBuy
             apiKey="123"

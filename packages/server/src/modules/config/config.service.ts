@@ -17,6 +17,10 @@ export class ConfigService {
     HOST: string.required(),
     PORT: number.default(4000),
     SECRET_JWT_KEY: string.required(),
+    UNLIMIT_API_KEY_SECRET: string.required(),
+    PREDICT_HQ_ACCESS_TOKEN: string.required(),
+    AUTH_0_DOMAIN: string.required(),
+    AUTH_0_AUDIENCE: string.required(),
   });
   private envConfig: DotenvParseOutput;
   private logger = new Logger(ConfigService.name);
