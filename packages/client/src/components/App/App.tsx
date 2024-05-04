@@ -54,26 +54,6 @@ export const App: FC<unknown> = () => {
           <Container maxWidth="md">
             <OnBoarding />
           </Container>
-          {/* 
-          <LoginButton />
-          {isAuthenticated && <WorldCoinSignIn />}
-          {isAuthenticated && <Wallet />}
-          {isAuthenticated && <SetLocation />}
-
-          {isAuthenticated && activeAccount && (
-            <GateFiBuy
-              apiKey="123"
-              environment="sandbox"
-              amount="100.00"
-              crypto="C98"
-              fiat="USD"
-              partnerAccountId="123"
-              paymentMethod="APPLEPAY"
-              redirectUrl="http://localhost:3000"
-              region="AU"
-              walletAddress={activeAccount.address}
-            />
-          )} */}
         </body>
       </Box>
     </>

@@ -4,11 +4,15 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 const LoginButton = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   return (
     <Box sx={{ textAlign: 'center', p: 4 }}>
-      <Button variant="contained" onClick={async () => loginWithRedirect()}>
+      <Button
+        disabled={isAuthenticated}
+        variant="contained"
+        onClick={async () => loginWithRedirect()}
+      >
         Log In
       </Button>
     </Box>
