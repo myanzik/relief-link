@@ -10,14 +10,13 @@ import WorldCoinSignIn from './WorldCoinSignIn';
 import Wallet from './Wallet';
 import SetLocation from './SetLocation';
 import GateFiBuy from './GateFiBuy';
-import { useActiveAccount } from 'thirdweb/react';
+import BuyPolicy from './BuyPolicy';
 
 const steps = [
   'Login',
   'Prove You Are Human',
   'Connect Your Wallet',
   'Set Your Location',
-  'Purchase Crypto',
   'Get Insured',
   // 'Get Relief Aid',
 ];
@@ -27,6 +26,7 @@ const stepComponents = [
   <WorldCoinSignIn key={1} />,
   <Wallet key={2} />,
   <SetLocation key={3} />,
+  <BuyPolicy />,
 ];
 
 // replace "steps" with "stepDetails" and then use the .label field to get the step label text and the .component field to get the component to display on the page.
@@ -35,23 +35,7 @@ const stepDetails = [
   { label: 'Prove You Are Human', component: <WorldCoinSignIn /> },
   { label: 'Connect Your Wallet', component: <Wallet /> },
   { label: 'Set Your Location', component: <SetLocation /> },
-  {
-    label: 'Purchase Crypto',
-    component: (
-      <GateFiBuy
-        apiKey="123"
-        environment="sandbox"
-        amount="100.00"
-        crypto="C98"
-        fiat="USD"
-        partnerAccountId="123"
-        paymentMethod="APPLEPAY"
-        redirectUrl="http://localhost:3000"
-        region="AU"
-      />
-    ),
-  },
-  // { label: 'Get Insured', component: <??? /> },
+  { label: 'Get Insured', component: <BuyPolicy /> },
   // { label: 'Get Relief Aid', component: <??? /> },
 ];
 export default function OnBoarding() {

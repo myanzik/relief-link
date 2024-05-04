@@ -14,28 +14,7 @@ const DEFAULT_SIGNATURE =
 
 const MERCHANT_ID = 'fa23a156-a95e-4706-84c4-f6999006f32c';
 
-// const url = 'https://api-sandbox.gatefi.com/onramp/v1/buy';
-// const options = {
-//   method: 'GET',
-//   headers: {
-//     signature:
-//       '2b6b6c58d175ec6bd13c92a17d262fce9336fe1bb41fc1bae0753927c0bbcf2d',
-//     Accept: 'application/json',
-//     'api-key': '123',
-//   },
-// };
-
-// try {
-//   const response = await fetch(url, options);
-//   const data = await response.json();
-//   console.log(data);
-// } catch (error) {
-//   console.error(error);
-// }
-
 interface GateFiBuyProps {
-  // The API key for the GateFi API.
-  apiKey: string;
   // environment for the GateFi API. One of
   environment: 'sandbox' | 'production' | 'mock-server';
   // Redirects the user to this url if the purchase is cancelled.
@@ -82,9 +61,6 @@ export default function GateFiBuy(props: GateFiBuyProps) {
   const { isAuthenticated, user } = useAuth0();
   const activeAccount = useActiveAccount();
 
-  if (!isAuthenticated) {
-    return null;
-  }
   const userEmail = user?.email;
 
   const signature = props.signature ?? DEFAULT_SIGNATURE;
@@ -114,10 +90,10 @@ export default function GateFiBuy(props: GateFiBuyProps) {
         externalId: randomString,
         defaultFiat: {
           currency: 'USD',
-          amount: '20',
+          amount: '100',
         },
         defaultCrypto: {
-          currency: 'USDT-BEP20',
+          currency: 'ETH',
         },
       });
     }
