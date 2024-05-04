@@ -124,11 +124,4 @@ contract ApiCallOracle is IApiCallOracle, FunctionsClient, ConfirmedOwner {
 	function isAddressAdded(address _victimAddress) public view returns (bool) {
 		return victimAddressAdded[_victimAddress];
 	}
-
-	function sendRequest(
-		uint64 subscriptionId,
-		string[] calldata args
-	) external override returns (bytes32) {}
-
-	constructor(address router) override(ConfirmedOwner, FunctionsClient) {}
 }
