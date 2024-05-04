@@ -19,7 +19,7 @@ const steps = [
   'Set Your Location',
   'Purchase Crypto',
   'Get Insured',
-  'Get Relief Aid',
+  // 'Get Relief Aid',
 ];
 
 const stepComponents = [
