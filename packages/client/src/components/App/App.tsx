@@ -10,6 +10,8 @@ import WorldCoinSignIn from '../WorldCoinSignIn';
 import Wallet from '../Wallet';
 import GateFiBuy from '../GateFiBuy';
 import SetLocation from '../SetLocation';
+import ProfilePicture from '../header/ProfilePicture';
+import Logo from '../header/Logo';
 
 export const App: FC<unknown> = () => {
   const [response, setResponse] = useState<string>('NO SERVER RESPONSE');
@@ -41,7 +43,10 @@ export const App: FC<unknown> = () => {
   return (
     <>
       <header>
+        <Logo />
         <LoginButton />
+        <ProfilePicture />
+        
       </header>
       <div>
         {isAuthenticated && <WorldCoinSignIn />}
@@ -57,6 +62,7 @@ export const App: FC<unknown> = () => {
         {response}
         {JSON.stringify(activeAccount)}
         {activeAccount && <SetLocation />}
+        <SetLocation />
         {activeAccount && (
           <GateFiBuy
             apiKey="123"
