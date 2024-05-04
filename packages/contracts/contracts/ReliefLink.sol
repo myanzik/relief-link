@@ -13,12 +13,21 @@ contract ReliefLink is AccessControl, Multicall {
 	// Add the library methods
 	using EnumerableSet for EnumerableSet.AddressSet;
 
+	struct victimData {
+		string lat;
+		string lon;
+		bool hasClaimed;
+	}
+
 	// Declare a set state variable
 	EnumerableSet.AddressSet private victims;
+	mapping(address => victimData) public victimDetails;
 
 	IApiCallOracle public apiCallOracle;
 	IERC20 public reliefToken;
 	bool public hasTriggered;
+
+	uint256 public minAmount = 10; // 10 token
 
 	constructor(
 		address[] memory _admins,
@@ -44,9 +53,24 @@ contract ReliefLink is AccessControl, Multicall {
 
 	//#region manageVictim
 
-	function addVictim(address victim) public onlyAdmin {
+	function addVictim(
+		address victim,
+		string memory lat,
+		string memory lon
+	) public onlyAdmin {
+		victimDetails[victim] = victimData(lat, lon, false);
 		victims.add(victim);
 		// Add victim to the list of victims
+	}
+
+	function buyPolicy(string memory lat, string memory lon) public {
+		//check if user has relief token
+		//transfer relief token to contract
+		require(reliefToken.balanceOf(msg.sender) > 0, "Insufficient balance");
+		reliefToken.transferFrom(msg.sender, address(this), minAmount);
+		// Add the victim to the list of victims
+		victimDetails[msg.sender] = victimData(lat, lon, false);
+		victims.add(msg.sender);
 	}
 
 	function getVictimCount() public view returns (uint256) {
@@ -98,6 +122,7 @@ contract ReliefLink is AccessControl, Multicall {
 			"No balance to claim"
 		);
 		require(hasTriggered, "Not Released");
+		victimDetails[msg.sender].hasClaimed = true;
 		reliefToken.transfer(msg.sender, getReliefAmount());
 	}
 }

@@ -23,6 +23,10 @@ contract ReliefToken is ERC20, ERC20Permit, Ownable {
 		_;
 	}
 
+	function addMinter(address minter) public onlyOwner {
+		minters[minter] = true;
+	}
+
 	function mint(address to, uint256 amount) public onlyMinter {
 		_mint(to, amount);
 	}
