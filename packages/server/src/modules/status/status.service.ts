@@ -12,21 +12,7 @@ export class StatusService {
   private version: Dictionary<string>;
 
   constructor(private readonly configService: ConfigService) {
-    this.version = readFileSync(
-      join(configService.rootDir, '..', '..', 'VERSION')
-    )
-      .toString()
-      .split(/[\r\n]+/)
-      .reduce((agg, line) => {
-        const [key, value] = line.split('=');
-
-        // The client is served from another Docker image
-        // thus, this one isn't necessarily correct
-        if (key !== 'CLIENT_VERSION') {
-          agg[key] = value;
-        }
-        return agg;
-      }, {} as Dictionary<string>);
+    this.version = { SERVER_VERSION: '1.0.0' };
   }
 
   getStatus(): string {
