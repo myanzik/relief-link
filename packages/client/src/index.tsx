@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
+import { ThirdwebProvider } from 'thirdweb/react';
 import {
   RouterProvider,
   Router,
@@ -32,9 +33,11 @@ function ReactApp(): JSX.Element {
         redirect_uri: window.location.origin,
       }}
     >
-      <Suspense fallback={<div />}>
-        <RouterProvider router={router} />
-      </Suspense>
+      <ThirdwebProvider>
+        <Suspense fallback={<div />}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </ThirdwebProvider>
     </Auth0Provider>
   );
 }
