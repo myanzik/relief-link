@@ -18,17 +18,15 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 	bytes32 public s_lastRequestId;
 	bytes public s_lastResponse;
 	bytes public s_lastError;
+	address public victimAddress;
+
+	mapping(address => bool) public victimAddressAdded;
 
 	// Custom error type
 	error UnexpectedRequestID(bytes32 requestId);
 
 	// Event to log responses
-	event Response(
-		bytes32 indexed requestId,
-		bool isVictim,
-		bytes response,
-		bytes err
-	);
+	event Response(uint8 isVictim);
 
 	// Router address - Hardcoded for Base Sepolia
 	address router = 0xf9B8fc078197181C841c296C876945aaa425B278;
@@ -53,8 +51,8 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 	bytes32 donID =
 		0x66756e2d626173652d7365706f6c69612d310000000000000000000000000000;
 
-	// State variable to store the returned wallet address information
-	bool public isVictim;
+	// State variable to store the returned isVictim information
+	uint8 public isVictim;
 
 	/**
 	 * @notice Initializes the contract with the Chainlink router address and sets the contract owner
@@ -69,8 +67,10 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 	 */
 	function sendRequest(
 		uint64 subscriptionId,
-		string[] calldata args
-	) external onlyOwner returns (bytes32 requestId) {
+		string[] calldata args,
+		address _victimAddress
+	) external returns (bytes32 requestId) {
+		victimAddress = _victimAddress;
 		FunctionsRequest.Request memory req;
 		req.initializeRequestForInlineJavaScript(source); // Initialize the request with JS code
 		if (args.length > 0) req.setArgs(args); // Set the arguments for the request
@@ -104,11 +104,18 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 		// Update the contract's state variables with the response and any errors
 		s_lastResponse = response;
 
-		isVictim = abi.decode(response, (bool));
+		// Turn response into int
+		if (response.length > 0) {
+			isVictim = uint8(abi.decode(response, (uint256)));
+		}
+
+		if (isVictim == 1) {
+			victimAddressAdded[victimAddress] = true;
+		}
 
 		s_lastError = err;
 
 		// Emit an event to log the response
-		emit Response(requestId, isVictim, s_lastResponse, s_lastError);
+		emit Response(isVictim);
 	}
 }
