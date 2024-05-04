@@ -47,5 +47,8 @@
     "build-push:client": "PACKAGE=client ./scripts/build_and_push.sh",
     "lint": "yarn workspaces run lint"
   },
-  "packageManager": "yarn@4.2.1"
+  "packageManager": "yarn@4.2.1",
+  "dependencies": {
+    "@nestjs/config": "^3.2.2"
+  }
 }

@@ -44,7 +44,7 @@ export default ({
     plugins: [react()],
     optimizeDeps: {
       esbuildOptions: {
-        target: 'esnext',
+        target: 'es2020',
         // Node.js global to browser globalThis
         define: {
           global: 'globalThis',
@@ -70,6 +70,7 @@ export default ({
   return {
     ...baseConfig,
     build: {
+      target: 'es2020',
       sourcemap: true,
       rollupOptions: {
         output: {
