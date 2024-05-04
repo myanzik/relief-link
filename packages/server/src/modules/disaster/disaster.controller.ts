@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { DisasterService } from './disaster.service.js';
 
 interface DisasterSearch {
@@ -11,7 +11,8 @@ export class DisasterController {
   constructor(private readonly disasterService: DisasterService) {}
 
   @Get()
-  async checkDisaster(@Param() lat: string, @Param() lng: string) {
+  async checkDisaster(@Query('lat') lat: string, @Query('lng') lng: string) {
+    console.log(lat, lng);
     const result = await this.disasterService.checkDisaster(
       parseFloat(lat),
       parseFloat(lng)
