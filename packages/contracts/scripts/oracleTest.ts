@@ -19,7 +19,7 @@ async function main() {
 	console.log("Sending request...")
 
 	// Send a request and get the transaction receipt
-	const tx = await apiCallOracle.sendRequest(26, ["1"])
+	const tx = await apiCallOracle.sendRequest(26, ["90", "0"], )
 	console.log("Transaction hash:", tx.hash)
 }
 
