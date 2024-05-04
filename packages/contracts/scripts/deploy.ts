@@ -1,8 +1,7 @@
-/* Deploy the ERC-20 smart contract */
-
+/* Deploy Consumer Contract */
 import { ethers } from "hardhat"
-import path from 'path'
-import fs from 'fs'
+import path from "path"
+import fs from "fs"
 
 async function main() {
 	const contractClassName = "ApiCallOracle"
@@ -14,24 +13,22 @@ async function main() {
 	console.log("Contract Deployed at " + apiCallOracle.target)
 	//save address to file
 
-	const filePath = path.join(__dirname, 'deployedAddress.json')
-	fs.writeFileSync
-		(
-			filePath,
-			JSON.stringify
-				(
-					{
-						oracleAddress: apiCallOracle.target
-					},
-					null,
-					2
-				)
+	const filePath = path.join(__dirname, "deployedAddress.json")
+	fs.writeFileSync(
+		filePath,
+		JSON.stringify(
+			{
+				oracleAddress: apiCallOracle.target,
+			},
+			null,
+			2
 		)
+	)
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-	console.error(error)
-	process.exitCode = 1
-})
+main()
+	.then(() => process.exit(0))
+	.catch((error) => {
+		console.error(error)
+		process.exit(1)
+	})

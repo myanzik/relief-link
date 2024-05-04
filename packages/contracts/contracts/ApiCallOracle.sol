@@ -19,13 +19,20 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 	bytes public s_lastResponse;
 	bytes public s_lastError;
 
+	// Placeholder address for Sean's wallet testing
+	address public seansAddress = 0x38c6CfB57a194FC383C664A1c8182209c5C04577;
+
+	// Storing state of wallet addresses
+	mapping(address => bool) private walletAddressReceived;
+	address[] public walletAddresses;
+
 	// Custom error type
 	error UnexpectedRequestID(bytes32 requestId);
 
 	// Event to log responses
 	event Response(
 		bytes32 indexed requestId,
-		string character,
+		address walletAddress,
 		bytes response,
 		bytes err
 	);
@@ -54,8 +61,8 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 	bytes32 donID =
 		0x66756e2d626173652d7365706f6c69612d310000000000000000000000000000;
 
-	// State variable to store the returned character information
-	string public character;
+	// State variable to store the returned wallet address information
+	address public walletAddress;
 
 	/**
 	 * @notice Initializes the contract with the Chainlink router address and sets the contract owner
@@ -101,12 +108,24 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 		if (s_lastRequestId != requestId) {
 			revert UnexpectedRequestID(requestId); // Check if request IDs match
 		}
+
 		// Update the contract's state variables with the response and any errors
 		s_lastResponse = response;
-		character = string(response);
+
+		// walletAddress = address(
+		// 	uint160(uint256(keccak256(abi.encodePacked(response))))
+		// );
+
+		walletAddress = seansAddress;
+
 		s_lastError = err;
 
+		// Check if sender's wallet address is already received before
+		if (!walletAddressReceived[walletAddress]) {
+			walletAddressReceived[walletAddress] = true;
+		}
+
 		// Emit an event to log the response
-		emit Response(requestId, character, s_lastResponse, s_lastError);
+		emit Response(requestId, walletAddress, s_lastResponse, s_lastError);
 	}
 }
