@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Dictionary } from '@nest-react/domain';
+// import { Dictionary } from '@nest-react/domain';
 import { API_URL } from '~/config';
 import { Logger, checkServerVersion } from '~/utils';
 import LoginButton from '../LoginButton';
@@ -12,6 +12,9 @@ import GateFiBuy from '../GateFiBuy';
 import SetLocation from '../SetLocation';
 import ProfilePicture from '../header/ProfilePicture';
 import Logo from '../header/Logo';
+
+import Box from '@mui/material/Box';
+import ResponsiveAppBar from '../header/ResponsiveAppBar';
 
 export const App: FC<unknown> = () => {
   const [response, setResponse] = useState<string>('NO SERVER RESPONSE');
@@ -36,33 +39,26 @@ export const App: FC<unknown> = () => {
     checkServerVersion();
   }, []);
 
-  const dictExample: Dictionary<number> = {
-    first: 1,
-    second: 2,
-  };
+  // const dictExample: Dictionary<number> = {
+  //   first: 1,
+  //   second: 2,
+  // };
   return (
     <>
-      <header>
-        <Logo />
-        <LoginButton />
-        <ProfilePicture />
-        
-      </header>
+      <Box>
+        <ResponsiveAppBar />
+        <header>
+          <LoginButton />
+        </header>
+        <div>
+          {isAuthenticated && <WorldCoinSignIn />}
+
+          {isAuthenticated && <Wallet />}
+        </div>
+      </Box>
       <div>
-        {isAuthenticated && <WorldCoinSignIn />}
-        <Wallet />
-        Here we use a <code>Dictionary&lt;number&gt;</code> interface from the{' '}
-        <code>@nest-react/domain</code> package:
-        <pre>{JSON.stringify(dictExample)}</pre>
-      </div>
-      <div>
-        And here we get a response from the API:
-        <br />
-        <br />
-        {response}
-        {JSON.stringify(activeAccount)}
         {activeAccount && <SetLocation />}
-        <SetLocation />
+
         {activeAccount && (
           <GateFiBuy
             apiKey="123"
