@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
+    "@types/google.maps": "^3.55.8",
     "@types/randombytes": "^2",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",

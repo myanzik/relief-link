@@ -16,6 +16,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": false,
     "target": "ESNext",
-    "types": ["vite/client"]
+    "types": ["vite/client", "@types/google.maps"]
   }
 }
