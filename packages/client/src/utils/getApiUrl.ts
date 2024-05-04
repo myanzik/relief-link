@@ -3,5 +3,5 @@ export function getApiUrl(): string {
   if (hostname === 'localhost') {
     return 'http://localhost:4000';
   }
-  return `https://api.${hostname}`;
+  return `https://relief-link.vercel.app`;
 }
