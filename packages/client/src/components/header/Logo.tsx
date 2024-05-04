@@ -8,7 +8,7 @@ const Logo: React.FC = () => {
         <img
           src="/logo.png"
           alt="Logo image of hands holding the blockchain"
-          style={{ width: '50px', height: 'auto' }}
+          style={{ width: '4rem', height: 'auto' }}
         />
       </Link>
     </div>
