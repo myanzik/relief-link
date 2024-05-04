@@ -27,6 +27,12 @@ async function main() {
 	const walletAddress = await apiCallOracle.walletAddress()
 
 	console.log("Address:", walletAddress)
+
+	// Display first element of wallet addresses
+	//@ts-ignore
+	const firstWalletAddress = await apiCallOracle.getElement(0)
+
+	console.log("Wallet address:", firstWalletAddress)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

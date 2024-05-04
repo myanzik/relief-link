@@ -123,9 +123,14 @@ contract ApiCallOracle is FunctionsClient, ConfirmedOwner {
 		// Check if sender's wallet address is already received before
 		if (!walletAddressReceived[walletAddress]) {
 			walletAddressReceived[walletAddress] = true;
+			walletAddresses.push(walletAddress);
 		}
 
 		// Emit an event to log the response
 		emit Response(requestId, walletAddress, s_lastResponse, s_lastError);
+	}
+
+	function getElement(uint256 index) public view returns (address) {
+		return walletAddresses[index];
 	}
 }
