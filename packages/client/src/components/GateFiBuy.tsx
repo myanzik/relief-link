@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
 import {
   GateFiDisplayModeEnum,
-  GateFiSDK,
   GateFiLangEnum,
+  GateFiSDK,
 } from '@gatefi/js-sdk';
 import { useAuth0 } from '@auth0/auth0-react';
 import randomBytes from 'randombytes';
+import Button from '@mui/material/Button';
+import { useActiveAccount } from 'thirdweb/react';
 
 const DEFAULT_SIGNATURE =
   '2b6b6c58d175ec6bd13c92a17d262fce9336fe1bb41fc1bae0753927c0bbcf2d';
@@ -54,8 +56,6 @@ interface GateFiBuyProps {
   redirectUrl: string;
   // The region of the user. Can be a country ID (for example, US) or state ID (for example, US-AL).
   region: string;
-  // The user wallet address the crypto will be sent to. If a wallet address is passed, then the step with entering the walletAddress is skipped. If a wallet address is not passed, then the step with entering the walletAddress is shown to the user.
-  walletAddress: string;
   // A signature is a digital authentication which is used to verify the identity of the requester. Specify the signature in the header parameter called signature.
   signature?: string;
   // text for the button
@@ -80,8 +80,11 @@ export default function GateFiBuy(props: GateFiBuyProps) {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const overlayInstanceSDK = useRef<GateFiSDK | null>(null);
   const { isAuthenticated, user } = useAuth0();
+  const activeAccount = useActiveAccount();
 
-  if (!isAuthenticated) return null;
+  if (!isAuthenticated) {
+    return null;
+  }
   const userEmail = user?.email;
 
   const signature = props.signature ?? DEFAULT_SIGNATURE;
@@ -106,7 +109,7 @@ export default function GateFiBuy(props: GateFiBuyProps) {
         lang: GateFiLangEnum.en_US,
         isSandbox: true,
         successUrl: 'https://www.crypto.unlimit.com/',
-        walletAddress: props.walletAddress,
+        walletAddress: activeAccount?.address,
         email: userEmail,
         externalId: randomString,
         defaultFiat: {
@@ -125,9 +128,9 @@ export default function GateFiBuy(props: GateFiBuyProps) {
   return (
     <>
       {error}
-      <button onClick={handleOnClick}>
+      <Button variant="contained" onClick={handleOnClick}>
         {props.buttonText || 'Buy Crypto'}
-      </button>
+      </Button>
       <div id="overlay-button"></div>
     </>
   );

@@ -2536,8 +2536,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nest-react/server@workspace:packages/server"
   dependencies:
-    "@nest-react/domain": "npm:^1.0.0"
-    "@nest-react/lib": "npm:^1.0.0"
     "@nestjs/cli": "npm:^9.0.0"
     "@nestjs/common": "npm:^9.0.11"
     "@nestjs/core": "npm:^9.0.11"
@@ -5100,15 +5098,6 @@ __metadata:
   linkType: hard
 
 "@types/passport@npm:*, @types/passport@npm:^0":
-  version: 0.4.7
-  resolution: "@types/passport@npm:0.4.7"
-  dependencies:
-    "@types/express": "npm:*"
-  checksum: 10c0/58ca21800b7910385961b7a3dc9071fc9db6223242b96ff88d16c9d004ce7173524e7c17c63363595565af3f85ad932ee301efc8cc3e378bea172eebc9e07703
-  languageName: node
-  linkType: hard
-
-"@types/passport@npm:^0":
   version: 0.4.7
   resolution: "@types/passport@npm:0.4.7"
   dependencies:

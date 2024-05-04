@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-// import { Dictionary } from '@nest-react/domain';
 import { API_URL } from '~/config';
 import { Logger, checkServerVersion } from '~/utils';
 import LoginButton from '../LoginButton';
@@ -10,11 +9,13 @@ import WorldCoinSignIn from '../WorldCoinSignIn';
 import Wallet from '../Wallet';
 import GateFiBuy from '../GateFiBuy';
 import SetLocation from '../SetLocation';
-import ProfilePicture from '../header/ProfilePicture';
-import Logo from '../header/Logo';
 
 import Box from '@mui/material/Box';
 import ResponsiveAppBar from '../header/ResponsiveAppBar';
+import OnBoarding from '../OnBoarding';
+import Container from '@mui/material/Container';
+import Logo from '../header/Logo';
+import LargeLogo from '../LargeLogo';
 
 export const App: FC<unknown> = () => {
   const [response, setResponse] = useState<string>('NO SERVER RESPONSE');
@@ -39,40 +40,42 @@ export const App: FC<unknown> = () => {
     checkServerVersion();
   }, []);
 
-  // const dictExample: Dictionary<number> = {
-  //   first: 1,
-  //   second: 2,
-  // };
   return (
     <>
       <Box>
-        <ResponsiveAppBar />
         <header>
-          <LoginButton />
+          <ResponsiveAppBar />
         </header>
-        <div>
-          {isAuthenticated && <WorldCoinSignIn />}
+        <Container maxWidth="md">
+          <LargeLogo />
+        </Container>
 
+        <body>
+          <Container maxWidth="md">
+            <OnBoarding />
+          </Container>
+          {/* 
+          <LoginButton />
+          {isAuthenticated && <WorldCoinSignIn />}
           {isAuthenticated && <Wallet />}
-        </div>
+          {isAuthenticated && <SetLocation />}
+
+          {isAuthenticated && activeAccount && (
+            <GateFiBuy
+              apiKey="123"
+              environment="sandbox"
+              amount="100.00"
+              crypto="C98"
+              fiat="USD"
+              partnerAccountId="123"
+              paymentMethod="APPLEPAY"
+              redirectUrl="http://localhost:3000"
+              region="AU"
+              walletAddress={activeAccount.address}
+            />
+          )} */}
+        </body>
       </Box>
-      <div>
-        {activeAccount && <SetLocation />}
-        {activeAccount && (
-          <GateFiBuy
-            apiKey="123"
-            environment="sandbox"
-            amount="100.00"
-            crypto="C98"
-            fiat="USD"
-            partnerAccountId="123"
-            paymentMethod="APPLEPAY"
-            redirectUrl="http://localhost:3000"
-            region="AU"
-            walletAddress={activeAccount.address}
-          />
-        )}
-      </div>
     </>
   );
 };

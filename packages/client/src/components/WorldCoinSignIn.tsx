@@ -1,3 +1,5 @@
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import {
   IDKitWidget,
   ISuccessResult,
@@ -34,7 +36,13 @@ function WorldCoinSignIn() {
       handleVerify={verifyProof}
       onSuccess={onSuccess}
     >
-      {({ open }) => <button onClick={open}>Verify with World ID</button>}
+      {({ open }) => (
+        <Box sx={{ textAlign: 'center', p: 4 }}>
+          <Button variant="contained" onClick={open}>
+            Verify with World ID
+          </Button>
+        </Box>
+      )}
     </IDKitWidget>
   );
 }

@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import React from 'react';
 import { ConnectButton } from 'thirdweb/react';
 import { createWallet, inAppWallet } from 'thirdweb/wallets';
@@ -12,13 +13,12 @@ const wallets = [
 ];
 
 export default function Wallet() {
-  const { place } = React.useContext(AppContext);
+  // const { place } = React.useContext(AppContext);
   return (
     <div>
-      {place && (
-        <span>You're lat/lng is: {place.geometry?.location?.toString()}</span>
-      )}
-      <ConnectButton client={client} wallets={wallets} />
+      <Box sx={{ textAlign: 'center', p: 4 }}>
+        <ConnectButton client={client} wallets={wallets} />
+      </Box>{' '}
     </div>
   );
 }
