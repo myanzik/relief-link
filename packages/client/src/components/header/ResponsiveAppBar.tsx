@@ -14,17 +14,49 @@ import MenuItem from '@mui/material/MenuItem';
 import ProfilePicture from './ProfilePicture';
 import Logo from './Logo';
 import { useAuth0 } from '@auth0/auth0-react';
+import { readContract, getContract } from "thirdweb";
+import { baseSepolia } from "thirdweb/chains";
+import client from '~/utils/thirdWebClient';
+import { reliefTokenAbi } from '~/utils/contractAbi';
+import { formatEther } from 'viem';
+import { reliefTokenAddress } from '~/config';
+import { useActiveAccount } from "thirdweb/react";
+
 
 const settings = ['Logout'];
 
 function ResponsiveAppBar() {
   const { isAuthenticated } = useAuth0();
+  const activeAccount = useActiveAccount();
+  const [balance, setBalance] = React.useState<string | null>(0);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+
+  const contract = getContract({
+    // the client you have created via `createThirdwebClient()`
+    client,
+    // the chain the contract is deployed on
+    chain: baseSepolia,
+    // the contract's address
+    address: reliefTokenAddress,
+    // OPTIONAL: the contract's axbi
+  });
+  const getBalance = async () => {
+    if (activeAccount) {
+      const tokenBalance = await readContract({
+        contract: contract,
+        method: "function balanceOf(address) view returns (uint256)",
+        params: [activeAccount?.address],
+      });
+      console.log({ tokenBalance })
+
+      setBalance(formatEther(tokenBalance));
+    }
+  }
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -40,6 +72,10 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  React.useEffect(() => {
+    getBalance();
+  }
+    , [activeAccount]);
 
   return (
     <AppBar position="static">
@@ -95,6 +131,9 @@ function ResponsiveAppBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 0 }}>
+            {/* move litte left */}
+            {activeAccount && <span style={{ marginRight: '50px' }}>Balance : {balance}</span>}
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {isAuthenticated && (
