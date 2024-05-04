@@ -10,7 +10,7 @@ const LargeLogo: React.FC = () => {
           <img
             src="/logo.png"
             alt="Logo image of hands holding the blockchain"
-            style={{ width: '300px', height: 'auto' }}
+            style={{ width: '14rem', height: 'auto' }}
           />
         </Box>
       </Link>

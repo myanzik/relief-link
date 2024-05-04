@@ -16,6 +16,7 @@ import OnBoarding from '../OnBoarding';
 import Container from '@mui/material/Container';
 import Logo from '../header/Logo';
 import LargeLogo from '../LargeLogo';
+import HeatMap from '../HeatMapImg';
 
 export const App: FC<unknown> = () => {
   const [response, setResponse] = useState<string>('NO SERVER RESPONSE');
@@ -49,12 +50,14 @@ export const App: FC<unknown> = () => {
         <Container maxWidth="md">
           <LargeLogo />
         </Container>
-
         <body>
           <Container maxWidth="md">
             <OnBoarding />
           </Container>
         </body>
+        <Box>
+          <HeatMap />
+        </Box>
       </Box>
     </>
   );
