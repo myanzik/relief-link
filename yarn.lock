@@ -2417,6 +2417,8 @@ __metadata:
     "@nest-react/domain": "npm:^1.0.0"
     "@nest-react/lib": "npm:^1.0.0"
     "@types/debug": "npm:^4.1.7"
+    "@types/google.maps": "npm:^3.55.8"
+    "@types/googlemaps": "npm:^3.43.3"
     "@types/randombytes": "npm:^2"
     "@types/react": "npm:^18.0.17"
     "@types/react-dom": "npm:^18.0.6"
@@ -4771,6 +4773,20 @@ __metadata:
     "@types/minimatch": "npm:*"
     "@types/node": "npm:*"
   checksum: 10c0/a8eb5d5cb5c48fc58c7ca3ff1e1ddf771ee07ca5043da6e4871e6757b4472e2e73b4cfef2644c38983174a4bc728c73f8da02845c28a1212f98cabd293ecae98
+  languageName: node
+  linkType: hard
+
+"@types/google.maps@npm:^3.55.8":
+  version: 3.55.8
+  resolution: "@types/google.maps@npm:3.55.8"
+  checksum: 10c0/d7d6179bc995f20e24bb85b3b87fe860728e5349f0104f3c4bbcb8c6ead1ad9dddf198a0f28cec63cebb81d8fa44cc37b85b6b2773ab6b966db5d529fb234c8a
+  languageName: node
+  linkType: hard
+
+"@types/googlemaps@npm:^3.43.3":
+  version: 3.43.3
+  resolution: "@types/googlemaps@npm:3.43.3"
+  checksum: 10c0/7ad03a8107de0bbfa73d5a96708a3eb52a88cc7ef80d877d018ee16696cab2893614756f430d3ae0ea895e8d40e112f6de658aa3623497b088243fe24d3feb21
   languageName: node
   linkType: hard
 
