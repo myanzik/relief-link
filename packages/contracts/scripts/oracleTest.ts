@@ -21,12 +21,6 @@ async function main() {
 	// Send a request and get the transaction receipt
 	const tx = await apiCallOracle.sendRequest(26, ["1"])
 	console.log("Transaction hash:", tx.hash)
-
-	// Access the address from the contract state
-	//@ts-ignore
-	const walletAddress = await apiCallOracle.walletAddress()
-
-	console.log("Address:", walletAddress)
 }
 
 // We recommend this pattern to be able to use async/await everywhere
