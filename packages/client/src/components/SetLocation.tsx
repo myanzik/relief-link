@@ -4,8 +4,18 @@ import Autocomplete from 'react-google-autocomplete';
 
 const googleAPIKey = 'AIzaSyA4sRpbJ-CMvDKXVPBrzen9MFts74wdXGE';
 
-export default function SetLocation() {
+function useRoles(): string[] {
   const { user } = useAuth0();
+  if (!user) {
+    return [];
+  }
+  console.log(user);
+  return user['https://reliefchain.xyz/roles'];
+}
+
+export default function SetLocation() {
+  const roles = useRoles();
+
   // TODO: save the address and ask for a radius if the user is a relief worker
   return (
     <div>
@@ -18,6 +28,18 @@ export default function SetLocation() {
           fields: ['address_components', 'geometry'],
         }}
       />
+      {roles.includes('relief-worker') && (
+        <>
+          <p>Set the radius of your work area</p>
+          <input type="number" placeholder="Radius in meters" />
+        </>
+      )}
+      {roles.includes('Funder') && (
+        <>
+          <p>You are a funder we don't need your address</p>
+          <input type="number" placeholder="Radius in meters" />
+        </>
+      )}
     </div>
   );
 }
