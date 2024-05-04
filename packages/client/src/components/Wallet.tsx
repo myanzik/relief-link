@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import React from 'react';
 import { ConnectButton } from 'thirdweb/react';
 import { createWallet, inAppWallet } from 'thirdweb/wallets';
@@ -13,7 +14,9 @@ const wallets = [
 export default function Wallet() {
   return (
     <div>
-      <ConnectButton client={client} wallets={wallets} />
+      <Box sx={{ textAlign: 'center', p: 4 }}>
+        <ConnectButton client={client} wallets={wallets} />
+      </Box>{' '}
     </div>
   );
 }
