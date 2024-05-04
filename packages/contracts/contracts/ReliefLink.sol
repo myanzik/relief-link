@@ -124,13 +124,14 @@ contract ReliefLink is AccessControl, Multicall {
 		return reliefToken.balanceOf(address(this)) / victims.length();
 	}
 
-	// function sendReliefToAll() public onlyAdmin {
-	// 	require(hasTriggered, "Not Released");
-
-	// 	for (uint256 i = 0; i < victims.length(); i++) {
-	// 		reliefToken.transfer(victims.at(i), getReliefAmount());
-	// 	}
-	// }
+	function sendReliefToAll() public onlyAdmin {
+		for (uint256 i = 0; i < victims.length(); i++) {
+			if (apiCallOracle.isAddressEligible(victims.at(i))) {
+				victimDetails[victims.at(i)].hasClaimed = true;
+				reliefToken.transfer(victims.at(i), getReliefAmount());
+			}
+		}
+	}
 
 	function claimRelief() public {
 		require(victims.contains(msg.sender), "You are not a victim");

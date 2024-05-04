@@ -23,7 +23,9 @@
 		"0-fetchRequest": "hardhat run scripts/flow-test/0-fetchRequest.ts --network base-sepolia",
 		"1-buyPolicy": "hardhat run scripts/flow-test/1-buyPolicy.ts --network base-sepolia",
 		"2-checkOracleStatus": "hardhat run scripts/flow-test/2-checkOracleStatus.ts --network base-sepolia",
-		"3-claimPayout": "hardhat run scripts/flow-test/3-claim.ts --network base-sepolia"
+		"3-sendPayout": "hardhat run scripts/flow-test/3-sendPayout.ts --network base-sepolia",
+		"4-claimPayout": "hardhat run scripts/flow-test/3-claimPayout.ts --network base-sepolia",
+		"5-checkPayoutStatus": "hardhat run scripts/flow-test/5-checkPayoutStatus.ts --network base-sepolia"
 	},
 	"dependencies": {
 		"@chainlink/contracts": "^1.1.0",

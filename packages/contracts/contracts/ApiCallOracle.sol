@@ -116,12 +116,14 @@ contract ApiCallOracle is IApiCallOracle, FunctionsClient, ConfirmedOwner {
 		}
 
 		s_lastError = err;
-		//victimAddressAdded[victimAddress] = true;
+		victimAddressAdded[victimAddress] = true;
 		// Emit an event to log the response
 		emit Response(isVictim);
 	}
 
-	function isAddressAdded(address _victimAddress) public view returns (bool) {
+	function isAddressEligible(
+		address _victimAddress
+	) public view returns (bool) {
 		return victimAddressAdded[_victimAddress];
 	}
 }

@@ -7,4 +7,8 @@ interface IApiCallOracle {
 		string[] calldata args,
 		address _victimAddress
 	) external returns (bytes32);
+
+	function isAddressEligible(
+		address _victimAddress
+	) external view returns (bool);
 }

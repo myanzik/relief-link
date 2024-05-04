@@ -35,6 +35,13 @@ async function main() {
 		reliefTokenAddress: reliefToken.target,
 		reliefLinkAddress: reliefLinkContract.target,
 	})
+
+	// send token to relief link
+	await reliefToken.transfer(
+		reliefLinkContract.target,
+		ethers.parseEther("1000")
+	)
+
 	//save address to file
 
 	const filePath = path.join(__dirname, "deployedAddress.json")
