@@ -46,12 +46,12 @@ export const App: FC<unknown> = () => {
         <header>
           <ResponsiveAppBar />
         </header>
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <LargeLogo />
         </Container>
 
         <body>
-          <Container maxWidth="sm">
+          <Container maxWidth="md">
             <OnBoarding />
           </Container>
           {/* 
