@@ -37,13 +37,14 @@ contract ApiCallOracle is IApiCallOracle, FunctionsClient, ConfirmedOwner {
 	string source =
 		"const characterId = args[0];"
 		"const apiResponse = await Functions.makeHttpRequest({"
-		"url: `https://swapi.info/api/people/${characterId}/`"
+		"url: `https://run.mocky.io/v3/8d36a8cd-94ed-4265-99f7-4cc2c2ab6ceb`"
+		"method: 'GET',"
 		"});"
 		"if (apiResponse.error) {"
 		"throw Error('Request failed');"
 		"}"
 		"const { data } = apiResponse;"
-		"return Functions.encodeString(data.name);";
+		"return Functions.encodeUint256(data);";
 
 	//Callback gas limit
 	uint32 gasLimit = 300000;
@@ -115,8 +116,12 @@ contract ApiCallOracle is IApiCallOracle, FunctionsClient, ConfirmedOwner {
 		}
 
 		s_lastError = err;
-
+		//victimAddressAdded[victimAddress] = true;
 		// Emit an event to log the response
 		emit Response(isVictim);
+	}
+
+	function isAddressAdded(address _victimAddress) public view returns (bool) {
+		return victimAddressAdded[_victimAddress];
 	}
 }

@@ -19,7 +19,11 @@
 		"format:check": "prettier --check .",
 		"format:write": "prettier --write .",
 		"lint:check": "eslint .",
-		"lint:fix": "eslint --fix ."
+		"lint:fix": "eslint --fix .",
+		"0-fetchRequest": "hardhat run scripts/flow-test/0-fetchRequest.ts --network base-sepolia",
+		"1-buyPolicy": "hardhat run scripts/flow-test/1-buyPolicy.ts --network base-sepolia",
+		"2-checkOracleStatus": "hardhat run scripts/flow-test/2-checkOracleStatus.ts --network base-sepolia",
+		"3-claimPayout": "hardhat run scripts/flow-test/3-claim.ts --network base-sepolia"
 	},
 	"dependencies": {
 		"@chainlink/contracts": "^1.1.0",
