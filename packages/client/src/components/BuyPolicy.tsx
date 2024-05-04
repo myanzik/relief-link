@@ -560,7 +560,6 @@ export default function BuyPolicy() {
   const [message, setMessage] = React.useState('');
 
   const buyPolicy = async () => {
-    setLoading(true);
     setError('');
   };
 
