@@ -2425,7 +2425,6 @@ __metadata:
     "@nest-react/lib": "npm:^1.0.0"
     "@types/debug": "npm:^4.1.7"
     "@types/google.maps": "npm:^3.55.8"
-    "@types/googlemaps": "npm:^3.43.3"
     "@types/randombytes": "npm:^2"
     "@types/react": "npm:^18.0.17"
     "@types/react-dom": "npm:^18.0.6"
@@ -2548,7 +2547,7 @@ __metadata:
     "@nestjs/schematics": "npm:^9.0.1"
     "@nestjs/swagger": "npm:^7.3.1"
     "@nestjs/testing": "npm:^9.0.11"
-    "@types/express": "npm:^4.17.13"
+    "@types/express": "npm:^4.17.21"
     "@types/jest": "npm:^28.1.7"
     "@types/node": "npm:^16.11.0"
     "@types/passport": "npm:^0"
@@ -2557,6 +2556,8 @@ __metadata:
     "@types/supertest": "npm:^2.0.12"
     "@typescript-eslint/eslint-plugin": "npm:^5.33.1"
     "@typescript-eslint/parser": "npm:^5.33.1"
+    "@worldcoin/idkit": "npm:^1.2.0"
+    axios: "npm:^1.6.8"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^8.22.0"
     eslint-config-prettier: "npm:^8.5.0"
@@ -4817,7 +4818,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*, @types/express@npm:^4.17.13, @types/express@npm:^4.17.17":
+"@types/express@npm:*, @types/express@npm:^4.17.17, @types/express@npm:^4.17.21":
   version: 4.17.21
   resolution: "@types/express@npm:4.17.21"
   dependencies:
@@ -4852,13 +4853,6 @@ __metadata:
   version: 3.55.8
   resolution: "@types/google.maps@npm:3.55.8"
   checksum: 10c0/d7d6179bc995f20e24bb85b3b87fe860728e5349f0104f3c4bbcb8c6ead1ad9dddf198a0f28cec63cebb81d8fa44cc37b85b6b2773ab6b966db5d529fb234c8a
-  languageName: node
-  linkType: hard
-
-"@types/googlemaps@npm:^3.43.3":
-  version: 3.43.3
-  resolution: "@types/googlemaps@npm:3.43.3"
-  checksum: 10c0/7ad03a8107de0bbfa73d5a96708a3eb52a88cc7ef80d877d018ee16696cab2893614756f430d3ae0ea895e8d40e112f6de658aa3623497b088243fe24d3feb21
   languageName: node
   linkType: hard
 
@@ -5106,6 +5100,15 @@ __metadata:
   linkType: hard
 
 "@types/passport@npm:*, @types/passport@npm:^0":
+  version: 0.4.7
+  resolution: "@types/passport@npm:0.4.7"
+  dependencies:
+    "@types/express": "npm:*"
+  checksum: 10c0/58ca21800b7910385961b7a3dc9071fc9db6223242b96ff88d16c9d004ce7173524e7c17c63363595565af3f85ad932ee301efc8cc3e378bea172eebc9e07703
+  languageName: node
+  linkType: hard
+
+"@types/passport@npm:^0":
   version: 0.4.7
   resolution: "@types/passport@npm:0.4.7"
   dependencies:
@@ -6744,7 +6747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.5.1, axios@npm:^1.6.0":
+"axios@npm:^1.5.1, axios@npm:^1.6.0, axios@npm:^1.6.8":
   version: 1.6.8
   resolution: "axios@npm:1.6.8"
   dependencies:
