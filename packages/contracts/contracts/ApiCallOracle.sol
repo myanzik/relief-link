@@ -104,6 +104,7 @@ contract ApiCallOracle is IApiCallOracle, FunctionsClient, ConfirmedOwner {
 		}
 		// Update the contract's state variables with the response and any errors
 		s_lastResponse = response;
+
 		character = string(response);
 		s_lastError = err;
 

@@ -64,7 +64,7 @@ const config: HardhatUserConfig = {
 		},
 		'base-sepolia': {
 			url: BASE_SEPOLIA_RPC_URL,
-			accounts: PRIVATE_KEY ? [PRIVATE_KEY] : { mnemonic: MNEMONIC },
+			accounts: { mnemonic: MNEMONIC },
 			gasPrice: 1000000000,
 		},
 		matic: {
@@ -87,29 +87,29 @@ const config: HardhatUserConfig = {
 			// Base
 			"base-mainnet": ETHERSCAN_API_KEY,
 			"base-sepolia": ETHERSCAN_API_KEY,
-			
+
 			// Polygon
 			polygon: POLYGONSCAN_API_KEY,
 			polygonMumbai: POLYGONSCAN_API_KEY,
 		},
 		customChains: [
 			{
-			  network: "base-mainnet",
-			  chainId: 8453,
-			  urls: {
-			   apiURL: "https://api.basescan.org/api",
-			   browserURL: "https://basescan.org"
-			  }
+				network: "base-mainnet",
+				chainId: 8453,
+				urls: {
+					apiURL: "https://api.basescan.org/api",
+					browserURL: "https://basescan.org"
+				}
 			},
 			{
-			  network: "base-sepolia",
-			  chainId: 84532,
-			  urls: {
-			   apiURL: "https://api-sepolia.basescan.org/api",
-			   browserURL: "https://sepolia.basescan.org/"
-			  }
+				network: "base-sepolia",
+				chainId: 84532,
+				urls: {
+					apiURL: "https://api-sepolia.basescan.org/api",
+					browserURL: "https://sepolia.basescan.org/"
+				}
 			}
-		  ]
+		]
 	},
 	sourcify: {
 		// Doesn't need an API key

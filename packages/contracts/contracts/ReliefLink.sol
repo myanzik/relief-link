@@ -71,8 +71,10 @@ contract ReliefLink is AccessControl, Multicall {
 	function buyPolicy(string memory lat, string memory lon) public {
 		//check if user has relief token
 		//transfer relief token to contract
-		require(reliefToken.balanceOf(msg.sender) > 0, "Insufficient balance");
-		reliefToken.transferFrom(msg.sender, address(this), minAmount);
+
+		//require(reliefToken.balanceOf(msg.sender) > 0, "Insufficient balance");
+		//reliefToken.transferFrom(msg.sender, address(this), minAmount);
+
 		// Add the victim to the list of victims
 		victimDetails[msg.sender] = victimData(lat, lon, false);
 		victims.add(msg.sender);
@@ -109,26 +111,26 @@ contract ReliefLink is AccessControl, Multicall {
 		return hasTriggered;
 	}
 
-	function sendRelief(address victim, uint256 amount) public onlyAdmin {
-		require(victims.contains(victim), "Victim not found");
-		require(
-			amount <= reliefToken.balanceOf(address(this)),
-			"Insufficient balance"
-		);
-		reliefToken.transfer(victim, amount);
-	}
+	// function sendRelief(address victim, uint256 amount) public onlyAdmin {
+	// 	require(victims.contains(victim), "Victim not found");
+	// 	require(
+	// 		amount <= reliefToken.balanceOf(address(this)),
+	// 		"Insufficient balance"
+	// 	);
+	// 	reliefToken.transfer(victim, amount);
+	// }
 
 	function getReliefAmount() public view returns (uint256) {
 		return reliefToken.balanceOf(address(this)) / victims.length();
 	}
 
-	function sendReliefToAll() public onlyAdmin {
-		require(hasTriggered, "Not Released");
+	// function sendReliefToAll() public onlyAdmin {
+	// 	require(hasTriggered, "Not Released");
 
-		for (uint256 i = 0; i < victims.length(); i++) {
-			reliefToken.transfer(victims.at(i), getReliefAmount());
-		}
-	}
+	// 	for (uint256 i = 0; i < victims.length(); i++) {
+	// 		reliefToken.transfer(victims.at(i), getReliefAmount());
+	// 	}
+	// }
 
 	function claimRelief() public {
 		require(victims.contains(msg.sender), "You are not a victim");
