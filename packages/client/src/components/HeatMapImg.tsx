@@ -3,6 +3,10 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
+import { TransactionButton } from 'thirdweb/react';
+import { createThirdwebClient, prepareContractCall } from 'thirdweb';
+import { contract } from './BuyPolicy';
+import Alert from '@mui/material/Alert';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
@@ -69,33 +73,63 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 
 const HeatMap: React.FC = () => {
+  const [message, setMessage] = React.useState('');
   const query = window.location.search.replace('claim=', '');
 
   return (
     <Box sx={{ textAlign: 'center', p: 1 }}>
+      {message && (
+        <Box sx={{ p: 2 }}>
+          <Alert>{message}</Alert>
+        </Box>
+      )}
       <ImageButton focusRipple style={{ width: '55rem', maxWidth: '100%' }}>
-        <ImageSrc style={{ backgroundImage: `url("/heatmap.png")` }} />
-        <ImageBackdrop className="MuiImageBackdrop-root" />
-        <Image>
-          <Typography
-            component="span"
-            variant="subtitle1"
-            color="inherit"
-            sx={{
-              position: 'relative',
-              p: 4,
-              pt: 2,
-              pb: theme => `calc(${theme.spacing(1)} + 6px)`,
-            }}
-          >
-            {query ? (
-              <span>Claim Emergency Aid</span>
-            ) : (
-              <span>Tap your wearable for assistance</span>
-            )}
-            <ImageMarked className="MuiImageMarked-root" />
-          </Typography>
-        </Image>
+        <TransactionButton
+          style={{}}
+          transaction={() => {
+            const tx = prepareContractCall({
+              contract,
+              method: 'claimRelief',
+              params: [],
+            });
+            return tx;
+          }}
+          onTransactionSent={result => {
+            console.log('Transaction submitted', result.transactionHash);
+            setMessage('Transaction submitted');
+          }}
+          onTransactionConfirmed={receipt => {
+            console.log('Transaction confirmed', receipt.transactionHash);
+            setMessage('Transaction confirmed! We hope you stay safe!');
+          }}
+          onError={error => {
+            console.error('Transaction error', error);
+            setMessage(`Transaction error! ${error}`);
+          }}
+        >
+          <ImageSrc style={{ backgroundImage: `url("/heatmap.png")` }} />
+          <ImageBackdrop className="MuiImageBackdrop-root" />
+          <Image>
+            <Typography
+              component="span"
+              variant="subtitle1"
+              color="inherit"
+              sx={{
+                position: 'relative',
+                p: 4,
+                pt: 2,
+                pb: theme => `calc(${theme.spacing(1)} + 6px)`,
+              }}
+            >
+              {query ? (
+                <span>Claim Emergency Aid</span>
+              ) : (
+                <span>Tap your wearable for assistance</span>
+              )}
+              <ImageMarked className="MuiImageMarked-root" />
+            </Typography>
+          </Image>
+        </TransactionButton>
       </ImageButton>
       {/* <img
         src="/heatmap.png"
